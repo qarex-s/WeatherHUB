@@ -1,6 +1,8 @@
 <?php
 session_start();
-
+if(isset($_SESSION['UserDataForChange'])){
+    unset($_SESSION['UserDataForChange']);
+}
 
 if (!isset($_SESSION['userToken']) ||  $_SESSION['userToken']['roleId'] != '1') {
   header('Location: /View/auth/Login.php');

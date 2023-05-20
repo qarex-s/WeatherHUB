@@ -17,6 +17,7 @@ $userIdGet = $_GET['searchUserId'];
 if($_SESSION['userToken']['id_user']==$userIdGet){
     $_SESSION['Message'] = "Адміністратору заборонено видаляти.";
     header('Location: /View/admin/AdminPage.php');
+    exit;
 }
  mysqli_query($connect, "DELETE FROM `user` WHERE `id_user` = '$userIdGet' ");
  $_SESSION['Message'] = "Користувача було успішно видалено.";

@@ -39,6 +39,7 @@ if(!isset($_SESSION['userToken'])){
       <img src="https://www.bmw.com.br/content/dam/bmw/marketBR/bmw_com_br/vendas-corporativas/vendascorporativas_teaser.jpg" alt="Avatar" class="avatar">
       <h4 class="mt-3">@<?=$_SESSION['userToken']['UserName']?></h4>
       <h4 class="mt-3"><?=$_SESSION['userToken']['Name']?></h4>
+        <a href="/controller/Action/ChangeUserLite.php" type="button" class="btn btn-secondary" >Редагувати</a>
     </div>
     <hr class="md-5">
     <div class="card-wrapper col-md-15 d-flex justify-content-center  md-5 md-5">

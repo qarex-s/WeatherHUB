@@ -5,6 +5,9 @@ if (!isset($_SESSION['userToken'])) {
     header('Location: /View/Auth/Login.php');
     exit;
 }
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,7 +72,7 @@ if (!isset($_SESSION['userToken'])) {
                                 </div>
                                 <div class="ml-auto">
                                 <a href="/controller/Home/ViewProfileController.php?searchUserId=' . $val['id_user'] . '" type="button" class="btn btn-primary">Перейти</a>
-                                <a href="/View/admin/ChangeUserPage.php?searchUserId=' . $val['id_user'] . '" type="button" class="btn btn-secondary">Редагувати</a>
+                                <a href="/controller/area/admin/ChangeUser.php?searchUserId=' . $val['id_user'] . '" type="button" class="btn btn-secondary">Редагувати</a>
                                 <a href="/controller/area/admin/DeleteUser.php?searchUserId=' . $val['id_user'] . '" type="button" class="btn btn-danger">Видалити</a>
                                 </div>
 
