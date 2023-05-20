@@ -3,9 +3,9 @@ session_start();
 ?>
 
 
-<header class="p-3 text-bg-dark">
-    <div class="container">
-    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-end">
+<header class="p-3 text-dark bg-light">
+    <div class="container ">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-end">
 
             <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
                 <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
@@ -15,7 +15,11 @@ session_start();
             <?php
             if (isset($_SESSION['userToken'])) {
                 echo '
-                            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">';
+                if ($_SESSION['userToken']['roleId'] == 1) {
+                    echo  '<li><a href="/Controller/area/admin/AdminController.php" class="nav-link px-2 text-secondary">Адмін</a></li>';
+                }
+                echo '
                                 <li><a href="/Controller/Home/WeatherController.php" class="nav-link px-2 text-secondary">Weather</a></li>
                                 <li><a href="/Controller/Home/ProfileController.php" class="nav-link px-2 text-dark">Profile</a></li>
                                 <li><a href="/Controller/Home/SearchController.php" class="nav-link px-2 text-dark">Search</a></li>
@@ -53,11 +57,7 @@ session_start();
                 ';
             }
             ?>
-
-
-
-
-
         </div>
     </div>
 </header>
+<hr class="md-5">

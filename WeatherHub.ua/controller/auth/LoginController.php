@@ -26,9 +26,14 @@ if(mysqli_fetch_row($checkUserDataAuth) > 0){
      "Name"=>$takeUserDataArray['Name'],
      "UserName"=>$takeUserDataArray['UserName'],
      "Age"=>$takeUserDataArray['Age'],
-     "genderId"=>$takeUserDataArray['genderId']
+     "genderId"=>$takeUserDataArray['genderId'],
+     "roleId"=>$takeUserDataArray['roleId']
     ];
-    header('Location: /controller/Home/WeatherController.php');
+    if($_SESSION['userToken']['roleId'] == 1){
+      header('Location: /controller/area/admin/AdminController.php');
+    }else{
+      header('Location: /controller/Home/WeatherController.php');
+    }
   }
 }else{
   $_SESSION['Message'] = "Не правильний пароль";

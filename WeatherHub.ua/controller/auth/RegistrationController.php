@@ -10,7 +10,7 @@ $userName = $_POST['userName'];
 $age = $_POST['age'];
 $password =md5($_POST['password']);
 $confirmPassword = md5($_POST['confirmPassword']);
-
+$roleId = 2;
 
 if($password != $confirmPassword)
 {
@@ -28,7 +28,10 @@ if($password != $confirmPassword)
         header('Location: /View/auth/Registration.php'); 
         exit;
     }
-    mysqli_query($connect," INSERT INTO `user` (`id_user`, `Email`, `Name`, `UserName`, `Age`, `genderId`) VALUES (NULL, '$email', '$name', '$userName', '$age', '1')");
+    if($email=="Admin@gmail.com"){
+        $roleId = 1;
+    }
+    mysqli_query($connect," INSERT INTO `user` (`id_user`, `Email`, `Name`, `UserName`, `Age`, `genderId`, `roleId`) VALUES (NULL, '$email', '$name', '$userName', '$age', '1','$roleId')");
     $takeUserVal = mysqli_query($connect, "SELECT * FROM `user` WHERE `email` = '$email' ");
     $takeUserValForArray = mysqli_fetch_assoc($takeUserVal);
     if ($takeUserValForArray) {

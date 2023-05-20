@@ -153,5 +153,6 @@ session_start();
       ?>
     </div>
   </div>
+  <?= include_once '../../predownload/footer.php' ?>
 </body>
 </html>
