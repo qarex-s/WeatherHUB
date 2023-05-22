@@ -21,6 +21,14 @@ if(trim($_GET['userName']) == "" || !isset($_GET['userName'])){
 
 $arrUsers = array();
     while($rowData = mysqli_fetch_assoc($usersVal)){
+        $idUser = $rowData['id_user'];
+        $imageUser = mysqli_fetch_assoc(mysqli_query($connect,"SELECT * FROM `image` 
+        WHERE `userId`='$idUser'"));
+        if($imageUser !=null){
+            $rowData['image'] = $imageUser['title_image'];
+        }else{
+            $rowData['image'] = 'nothing';
+        }
         array_push($arrUsers,$rowData);
     }
     if(count($arrUsers)>0 ){

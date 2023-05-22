@@ -19,6 +19,8 @@ if (!isset($_POST['searchUserId'])) {
 
     $userIdGet = $_GET['searchUserId'];
     $userFullDataVal = mysqli_fetch_assoc(mysqli_query($connect, "SELECT * FROM `user` WHERE `id_user` = '$userIdGet'"));
+    $image =  mysqli_fetch_assoc(mysqli_query($connect, "SELECT * FROM `image` 
+    WHERE `userId` = '$userIdGet'"));
     if ($userFullDataVal === null) {
         $_SESSION['Message'] = "Не знайдено даних.";
         header('Location: /View/admin/AdminPage.php');
@@ -36,7 +38,8 @@ if (!isset($_POST['searchUserId'])) {
                 "UserName" => $userFullDataVal['UserName'],
                 "Age" => $userFullDataVal['Age'],
                 "genderId" => $userFullDataVal['genderId'],
-                "roleId" => $userFullDataVal['roleId']
+                "roleId" => $userFullDataVal['roleId'],
+                "image"=>$image['title_image']
 
             ];
         }
@@ -58,7 +61,6 @@ $UserName = $_POST['UserName'];
 $Age = $_POST['Age'];
 $genderId = $_POST['genderId'];
 $roleId = $_POST['roleId'];
-
 mysqli_query($connect,"UPDATE `user` SET 
 `id_user`='$id_user',`Email`='$Email',
 `Name`='$Name',`UserName`='$UserName',

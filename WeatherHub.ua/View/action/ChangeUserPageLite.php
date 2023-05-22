@@ -23,7 +23,7 @@ if(!isset($_SESSION['AuthUserForEditLite'])){
 <body>
     <div class="container">
         <div class="text-center mt-5">
-            <img src="g" class="rounded-circle" alt="Avatar" style="width: 150px; height: 150px;">
+            <img src="<?=$_SESSION['userToken']['image']?>" class="rounded-circle" alt="Avatar" style="width: 150px; height: 150px;">
         </div>
         <div class="row mt-3">
             <div class="col-md-6 offset-md-3">

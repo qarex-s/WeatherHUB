@@ -1,41 +1,65 @@
 <?php
+if(!isset($_SESSION['userToken'])){
+    $_SESSION['Message'] = "Треба увійти в аккаунт";
+    header('Location: /View/auth/Login.php');
+}
+require_once 'TranslateWord.php';
 
-$WeatherInfo =[
+function RecomendedStat($Weather, $Temperature)
+{
+    global $WeatherInfo;
+    $scale = $WeatherInfo[$Weather];
 
-    'Thunderstorm'=>'Гроза',
-    'Drizzle'=>2,
-    'Rain'=>4,
-    'Snow'=>10,
-    'Mist'=>3,
-    'Haze'=>3,
-    'Fog'=>3,
-    'Sand'=>4,
-    'Ash'=>1,
-    'Squall'=>4,
-    'Tornado'=>5,
-    'Clear'=>1,
-    'Clouds'=>3,
-    'clear sky'=>1
+   
+
+    if($Temperature > 35){
+        $scale -= 2;
+    }else if ($Temperature >= 25 && $Temperature <= 35) {
+        $scale += 0;
+    } else if ($Temperature >= 15 && $Temperature < 25) {
+        $scale += 2;
+    } else if ($Temperature >= 5 && $Temperature < 15) {
+        $scale += 5;
+    } else if ($Temperature >= -5 && $Temperature < 5) {
+        $scale += 7;
+    } else if ($Temperature >= -30 && $Temperature < -5) {
+        $scale += 9;
+    } else if ($Temperature >= -60 && $Temperature < -30) {
+        $scale += 10;
+    }
+
+    if($scale<0){
+        $scale=1;
+    }else if($scale>10){
+        $scale = 10;
+    }
+    return $scale;
+
+}
 
 
-
-];
-
-function RecomendedText($Weather, $Temperature)
+function RecomendedImg($someSkale,$ClothesScale)
 {
 
-    if ($Temperature >= 25 && $Temperature <= 35) {
-        
-    }else if($Temperature >= 15 && $Temperature <25){
+    global $clothesImage;
+    $resultScale = $someSkale+$ClothesScale;
+    if($resultScale<1) $resultScale = 1;
+    else if($resultScale>10)$resultScale = 10;
+    return $clothesImage[$resultScale];
+}
 
-    }else if($Temperature >= 5 && $Temperature <15){
+function RecomendedText($someSkale)
+{
+    global $GeneralScale;
+    global $GeneratorEntries;
+    $numForEntires = rand(1, 9);
+    $Entry = $GeneratorEntries[$numForEntires];
+    $WeatherInfoText = $GeneralScale[$someSkale];
+    return $Entry.$WeatherInfoText;
+}
 
-    }else if($Temperature >= -5 && $Temperature <5){
 
-    }else if($Temperature >= -30 && $Temperature <-5){
-
-    }
-    else if($Temperature >= -60 && $Temperature <-30){
-
-    }
+function ClothesScaleFunc($nameFavClothe){
+    global $ClothesScale;
+    return $ClothesScale[$nameFavClothe];
 }

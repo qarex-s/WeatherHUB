@@ -1,6 +1,8 @@
 <?php
 session_start();
-if(isset($_SESSION['userToken'])){
-    unset($_SESSION['userToken']);
-    header('Location: /View/auth/Login.php');
-}
+
+session_unset();
+
+session_destroy();
+
+header('Location: /View/auth/Login.php');

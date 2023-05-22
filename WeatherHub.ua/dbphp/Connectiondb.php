@@ -1,7 +1,7 @@
 <?php
 
-$connect = mysqli_connect('localhost','root','','weatherdb');
+$connect = mysqli_connect('localhost', 'root', '', 'weatherdb');
 
-if(!$connect){
+if (!$connect) {
     die('Error connect');
 }

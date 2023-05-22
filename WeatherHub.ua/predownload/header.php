@@ -20,37 +20,37 @@ session_start();
                     echo  '<li><a href="/Controller/area/admin/AdminController.php" class="nav-link px-2 text-secondary">Адмін</a></li>';
                 }
                 echo '
-                                <li><a href="/Controller/Home/WeatherController.php" class="nav-link px-2 text-secondary">Weather</a></li>
-                                <li><a href="/Controller/Home/ProfileController.php" class="nav-link px-2 text-dark">Profile</a></li>
-                                <li><a href="/Controller/Home/SearchController.php" class="nav-link px-2 text-dark">Search</a></li>
-                                <li><a href="/Controller/Home/FriendsController.php" class="nav-link px-2 text-dark">Friends</a></li>
-                                <li><a href="#" class="nav-link px-2 text-dark">About</a></li>
+                                <li><a href="/Controller/Home/WeatherController.php" class="nav-link px-2 text-secondary">Погода</a></li>
+                                <li><a href="/Controller/Home/ProfileController.php" class="nav-link px-2 text-dark">Профіль</a></li>
+                                <li><a href="/Controller/Home/SearchController.php" class="nav-link px-2 text-dark">Пошук</a></li>
+                                <li><a href="/Controller/Home/FriendsController.php" class="nav-link px-2 text-dark">Друзі</a></li>
+                                <li><a href="/Controller/Home/FavoriteController.php" class="nav-link px-2 text-dark">Одяг</a></li>
                             </ul>
-                            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                                <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Введіть місто..." aria-label="Search">
+                            <form method="get" action="/Controller/Home/WeatherController.php" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                                <input type="search" class="form-control form-control-dark text-bg-dark" name="cityName" placeholder="Введіть місто..." aria-label="Search">
                             </form>
                             <div class="text-end">
                                 <form method="get" action="/controller/auth/LogoutController.php">
-                                    <button type="submit" class="btn btn-dark">Log-out</button>
+                                    <button type="submit" class="btn btn-dark">Вийти</button>
                                 </form>
                             </div>
                             ';
             } else {
                 echo '
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="/Controller/Home/WeatherController.php" class="nav-link px-2 text-secondary">Weather</a></li>
+                    <li><a href="/Controller/Home/WeatherController.php" class="nav-link px-2 text-secondary">Погода</a></li>
                 </ul>
                 <div class="text-end">
                 <div class="d-flex align-items-center ">
-                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                                <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Введіть місто..." aria-label="Search">
-                            </form>
+                    <form method="get" action="/Controller/Home/WeatherController.php" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                        <input type="search" class="form-control form-control-dark text-bg-dark" name="cityName" placeholder="Введіть місто..." aria-label="Search">
+                    </form>
                     <form method="get" action="/View/auth/Login.php" class="d-inline mx-2">
-                        <button type="submit" class="btn btn-outline-dark ">Login</button>
+                        <button type="submit" class="btn btn-outline-dark ">Вхід</button>
                     </form>
                     
                     <form method="get" action="/View/auth/Registration.php" class="d-inline mx-2">
-                        <button type="submit" class="btn btn-dark ">Sign-up</button>
+                        <button type="submit" class="btn btn-dark ">Реєстрація</button>
                     </form>
                     </div>
             </div>

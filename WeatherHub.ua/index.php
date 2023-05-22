@@ -9,13 +9,8 @@
     <title>WeatherHUB</title>
 </head>
 <body>
-<?= include_once 'predownload/header.php' ?>
-    <h1>hello world</h1>
-<form action="" method="post">
 
-
-
-</form>
+<?=header('Location: /controller/Home/WeatherController.php');?>
 
 </body>
 </html>

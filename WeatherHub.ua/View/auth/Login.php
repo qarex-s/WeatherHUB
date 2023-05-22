@@ -38,18 +38,18 @@ if (isset($_SESSION['userToken'])) {
 
   <div class="container">
     <div class="login-container">
-      <h2>Авторизация</h2>
+      <h2>Авторизація</h2>
       <form action="../../controller/auth/LoginController.php" method="post">
         <div class="form-group">
-          <input type="text" name="login" class="form-control" placeholder="Логин">
+          <input type="text" name="login" class="form-control" placeholder="Логін">
         </div>
         <div class="form-group">
           <input type="password" name="password" class="form-control" placeholder="Пароль">
         </div>
-        <button type="submit" class="btn btn-primary">Войти</button>
+        <button type="submit" class="btn btn-primary">Увійти</button>
       </form>
       <form action="../../View/auth/Registration.php" method="post">
-        <button type="submit" class="btn btn-secondary">Регистрация</button>
+        <button type="submit" class="btn btn-secondary">Реєстрація</button>
       </form>
       <?php
       if (isset($_SESSION["Message"])) {

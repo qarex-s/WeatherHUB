@@ -33,4 +33,4 @@ if($takeFriendShip ){
 
 mysqli_close($connect);
 
-header('Location: /View/Home/ViewProfile.php');
+header('Location: /Controller/Home/ViewProfileController.php?searchUserId='.$ChoosedUserId);

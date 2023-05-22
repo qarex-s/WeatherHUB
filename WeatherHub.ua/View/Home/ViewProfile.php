@@ -1,19 +1,20 @@
 <?php
 session_start();
-if(!isset($_SESSION['userToken'])){
-    $_SESSION['Message'] = "Треба увійти в аккаунт";
-    header('Location: /View/auth/Login.php');
+if (!isset($_SESSION['userToken'])) {
+  $_SESSION['Message'] = "Треба увійти в аккаунт";
+  header('Location: /View/auth/Login.php');
 }
-if(!isset($_SESSION['FindedUser'])){
+if (!isset($_SESSION['FindedUser'])) {
   $_SESSION['Message'] = "Ти не вибрав користувача";
-    header('Location: /View/Home/SearchPage.php');
+  header('Location: /View/Home/SearchPage.php');
 }
-if($_SESSION['FindedUser']['id_user'] == $_SESSION['userToken']['id_user']){
+if ($_SESSION['FindedUser']['id_user'] == $_SESSION['userToken']['id_user']) {
   header('Location: /View/Home/Profile.php');
 }
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Моя сторінка</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -39,41 +40,55 @@ if($_SESSION['FindedUser']['id_user'] == $_SESSION['userToken']['id_user']){
     }
   </style>
 </head>
+
 <body>
-<?= include_once '../../predownload/header.php' ?>
-<div class="container">
+  <?= include_once '../../predownload/header.php' ?>
+  <div class="container">
     <div class="text-center">
-      <img src="https://www.bmw.com.br/content/dam/bmw/marketBR/bmw_com_br/vendas-corporativas/vendascorporativas_teaser.jpg" alt="Avatar" class="avatar">
-      <h4 class="mt-3">@<?=$_SESSION['FindedUser']['UserName']?></h4>
-      <h4 class="mt-3"><?=$_SESSION['FindedUser']['Name']?></h4>
+      <img src="../../<?=$_SESSION['FindedUser']['image']?>" alt="Avatar" class="avatar">
+      <h2 class="mt-3">@<?= $_SESSION['FindedUser']['UserName'] ?></h2>
+      <h5 class="mt-3">Ім'я: <?= $_SESSION['FindedUser']['Name'] ?></h5>
+      <h6 class="mt-3">Пошта: <?= $_SESSION['FindedUser']['Email'] ?></h6>
       <?php
-        echo '<a href="/controller/Action/Subscribe.php" type="button" class="btn btn-primary mt-3">Підписатися</a>';
+      if($_SESSION['isFollowed'] == 1){
+        echo '<a href="/controller/Action/Subscribe.php" type="button" class="btn btn-secondary mt-3">Відписатися</a>';
+      }else{
+      echo '<a href="/controller/Action/Subscribe.php" type="button" class="btn btn-primary mt-3">Підписатися</a>';
+      }
       ?>
-      
+
     </div>
     <hr class="md-5">
     <div class="card-wrapper col-md-15 d-flex justify-content-center  md-5 md-5">
-      <div class="card col-md-4 text-center img-fluid mx-auto d-block ">
-        <img src="https://play-lh.googleusercontent.com/ItgvmfRg1po4nK925wRrEDrjFl2b8zGwiKCT9E6unaDgbga8yJIviFgtTLc1YJueGs4" style="width: 300px; height: 250px; object-fit: contain;" alt="Photo 1" class="card-img-top ">
+    <?php
+    
+    if(isset($_SESSION['infoReactionWeatherInProfile'])){
+      echo '
+      
+    <div class="card col-md-5 text-center img-fluid mx-auto d-block ">
+        <img src="' . $_SESSION['infoReactionWeatherInProfile']['ImageWeather'] . '" style="width: 300px; height: 250px; object-fit: contain;" alt="Photo 1" class="card-img-top ">
         <div class="card-body">
-          <p class="card-text">Опис фото 1</p>
+            <h5 class="card-text">Погода: ' . $_SESSION['infoReactionWeatherInProfile']['Name_weather'] . '</h5>
+            <h6 class="card-text">Місто: ' . $_SESSION['infoReactionWeatherInProfile']['City'] . '</h6>
+            <h6 class="card-text">' . $_SESSION['infoReactionWeatherInProfile']['Date'] . '</h6>
+            <h6 class="card-text">Температура: ' . $_SESSION['infoReactionWeatherInProfile']['Temperature'] . 'C</h6>
+            <p class="card-text">Хмарність: ' . $_SESSION['infoReactionWeatherInProfile']['Cloud'] . '%</p>
+            <p class="card-text">Вітер: ' . $_SESSION['infoReactionWeatherInProfile']['Wind'] . 'м/с</p>
+            <h4>Реакція:</h4>
+            <h5>' . $_SESSION['infoReactionInProfile'] . '</h5>
         </div>
-      </div>
-      <div class="card col-md-4  text-center img-fluid mx-auto d-block">
-        <img src="https://motor.ru/imgs/2022/09/28/02/5602932/18f509e7c1a7511c978e090d30974f1825123bd1.jpg" style="width: 300px; height: 250px; object-fit: contain;" alt="Photo 2" class="card-img-top ">
-        <div class="card-body">
-          <p class="card-text">Опис фото 2</p>
-        </div>
-      </div>
-      <div class="card col-md-4 text-center img-fluid mx-auto d-block" >
-        <img src="https://motor.ru/imgs/2022/09/28/02/5602932/18f509e7c1a7511c978e090d30974f1825123bd1.jpg" style="width: 300px; height: 250px; object-fit: contain; " alt="Photo 3" class="card-img-top">
-        <div class="card-body">
-          <p class="card-text">Опис фото 3</p>
-        </div>
-      </div>
+    </div>
+      
+    ';
+    }
+    
+    ?>
+   
+
     </div>
   </div>
 
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

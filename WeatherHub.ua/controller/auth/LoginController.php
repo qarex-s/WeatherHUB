@@ -20,14 +20,19 @@ if(mysqli_fetch_row($checkUserDataAuth) > 0){
   if($takeUserAuthValArray['passValue'] == $password){
     $takeUserData = mysqli_query($connect, "SELECT * FROM `user` WHERE `Email` = '$login' ");
     $takeUserDataArray = mysqli_fetch_assoc($takeUserData);
+    $user_id = $takeUserDataArray['id_user'];
+    $image = mysqli_fetch_assoc(mysqli_query($connect,"SELECT * FROM `image` WHERE `userId` = '$user_id'"));
+    $takeScaleClothe = mysqli_fetch_assoc(mysqli_query($connect, "SELECT * FROM `fav_clothe` WHERE `userId` = '$user_id' "));
     $_SESSION['userToken'] = [
-     "id_user"=>$takeUserDataArray['id_user'],
+     "id_user"=> $user_id,
      "Email"=>$takeUserDataArray['Email'],
      "Name"=>$takeUserDataArray['Name'],
      "UserName"=>$takeUserDataArray['UserName'],
      "Age"=>$takeUserDataArray['Age'],
      "genderId"=>$takeUserDataArray['genderId'],
-     "roleId"=>$takeUserDataArray['roleId']
+     "roleId"=>$takeUserDataArray['roleId'],
+     "image"=>$image['title_image']
+
     ];
     if($_SESSION['userToken']['roleId'] == 1){
       header('Location: /controller/area/admin/AdminController.php');

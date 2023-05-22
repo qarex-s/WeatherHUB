@@ -6,7 +6,7 @@ session_start();
 <html>
 
 <head>
-  <title>Weather</title>
+  <title>ПогодаЛайт</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
     .register-container {

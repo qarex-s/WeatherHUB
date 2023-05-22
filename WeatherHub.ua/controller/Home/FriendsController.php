@@ -17,6 +17,7 @@ $takeFollowUsersId = mysqli_query($connect, "SELECT `second_userId` FROM `friend
 
 $arrayFollowIdUser= array();
 while($takingFollowUserId = mysqli_fetch_assoc($takeFollowUsersId)){
+    
     array_push($arrayFollowIdUser,$takingFollowUserId['second_userId']);
 }
 if (empty($arrayFollowIdUser)) {
@@ -31,6 +32,15 @@ $takeFollowUsers = mysqli_query($connect, "SELECT * FROM `user` WHERE `id_user` 
 $followUsersArray = array();
 
 while ($takeUsers = mysqli_fetch_assoc($takeFollowUsers)) {
+
+    $idUser = $takeUsers['id_user'];
+        $imageUser = mysqli_fetch_assoc(mysqli_query($connect,"SELECT * FROM `image` 
+        WHERE `userId`='$idUser'"));
+        if($imageUser !=null){
+            $takeUsers['image'] = $imageUser['title_image'];
+        }else{
+            $takeUsers['image'] = 'nothing';
+        }
     array_push($followUsersArray, $takeUsers);
 }
 

@@ -15,7 +15,7 @@ if (!isset($_SESSION['userToken'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Results</title>
+    <title>Результат пошуку</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
         .rounded-circle {
@@ -62,13 +62,13 @@ if (!isset($_SESSION['userToken'])) {
                             
                                 <div class="d-flex align-items-center border p-3 mb-3">
                                 <div class="rounded-circle overflow-hidden" style="width: 100px; height: 100px;">
-                                    <img src="https://www.ixbt.com/img/n1/news/2022/7/5/bmw-ix5-bei-winter-tests_large.png" class="img-fluid rounded-circle" alt="Profile Image">
+                                    <img src="../../'.$val['image'].'" class="img-fluid rounded-circle" alt="Profile Image">
                                 </div>
                                 <div class="ml-3">
                                 <input type="hidden" name="searchUserId" value="' . $val['id_user'] . '"/> 
-                                    <h5>' . $val['Name'] . '</h5>
-                                    <p>' . $val['Email'] . '</p>
-                                    <p>City</p>
+                                    <h4>@' . $val['UserName'] . '</h4>
+                                    <p>Email: ' . $val['Email'] . '</p>
+                                    <p>Age: ' . $val['Age'] . '</p>
                                 </div>
                                 <div class="ml-auto">
                                 <a href="/controller/Home/ViewProfileController.php?searchUserId=' . $val['id_user'] . '" type="button" class="btn btn-primary">Перейти</a>

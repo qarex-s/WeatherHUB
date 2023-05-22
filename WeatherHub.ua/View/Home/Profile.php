@@ -1,8 +1,8 @@
 <?php
 session_start();
-if(!isset($_SESSION['userToken'])){
+if(!isset($_SESSION['userToken']) ||!isset($_SESSION['infoReactionWeatherInProfile'])){
     $_SESSION['Message'] = "Треба увійти в аккаунт";
-    header('Location: /View/auth/Login.php');
+    header('Location: /View/Home/Weather.php');
 }
 ?>
 <!DOCTYPE html>
@@ -36,29 +36,25 @@ if(!isset($_SESSION['userToken'])){
 <?= include_once '../../predownload/header.php' ?>
   <div class="container">
     <div class="text-center">
-      <img src="https://www.bmw.com.br/content/dam/bmw/marketBR/bmw_com_br/vendas-corporativas/vendascorporativas_teaser.jpg" alt="Avatar" class="avatar">
-      <h4 class="mt-3">@<?=$_SESSION['userToken']['UserName']?></h4>
-      <h4 class="mt-3"><?=$_SESSION['userToken']['Name']?></h4>
+      <img src="../../<?=$_SESSION['userToken']['image']?>" alt="Avatar" class="avatar">
+      <h2 class="mt-3">@<?=$_SESSION['userToken']['UserName']?></h2>
+      <h5 class="mt-3">Ім'я: <?=$_SESSION['userToken']['Name']?></h5>
+      <h6 class="mt-3">Пошта: <?=$_SESSION['userToken']['Email']?></h6>
         <a href="/controller/Action/ChangeUserLite.php" type="button" class="btn btn-secondary" >Редагувати</a>
     </div>
     <hr class="md-5">
     <div class="card-wrapper col-md-15 d-flex justify-content-center  md-5 md-5">
-      <div class="card col-md-4 text-center img-fluid mx-auto d-block ">
-        <img src="https://play-lh.googleusercontent.com/ItgvmfRg1po4nK925wRrEDrjFl2b8zGwiKCT9E6unaDgbga8yJIviFgtTLc1YJueGs4" style="width: 300px; height: 250px; object-fit: contain;" alt="Photo 1" class="card-img-top ">
+      <div class="card col-md-5 text-center img-fluid mx-auto d-block ">
+        <img src="<?=$_SESSION['infoReactionWeatherInProfile']['ImageWeather']?>" style="width: 300px; height: 250px; object-fit: contain;" alt="Photo 1" class="card-img-top ">
         <div class="card-body">
-          <p class="card-text">Опис фото 1</p>
-        </div>
-      </div>
-      <div class="card col-md-4  text-center img-fluid mx-auto d-block">
-        <img src="https://motor.ru/imgs/2022/09/28/02/5602932/18f509e7c1a7511c978e090d30974f1825123bd1.jpg" style="width: 300px; height: 250px; object-fit: contain;" alt="Photo 2" class="card-img-top ">
-        <div class="card-body">
-          <p class="card-text">Опис фото 2</p>
-        </div>
-      </div>
-      <div class="card col-md-4 text-center img-fluid mx-auto d-block" >
-        <img src="https://motor.ru/imgs/2022/09/28/02/5602932/18f509e7c1a7511c978e090d30974f1825123bd1.jpg" style="width: 300px; height: 250px; object-fit: contain; " alt="Photo 3" class="card-img-top">
-        <div class="card-body">
-          <p class="card-text">Опис фото 3</p>
+        <h5 class="card-text ">Погода: <?=$_SESSION['infoReactionWeatherInProfile']['Name_weather']?></h5>
+        <h6 class="card-text ">Місто: <?=$_SESSION['infoReactionWeatherInProfile']['City']?></h6>
+        <h6 class="card-text "><?=$_SESSION['infoReactionWeatherInProfile']['Date']?></h6>
+        <h6 class="card-text ">Температура: <?=$_SESSION['infoReactionWeatherInProfile']['Temperature']?>C</h6>
+        <p class="card-text ">Хмарність: <?=$_SESSION['infoReactionWeatherInProfile']['Cloud']?>%</p>
+        <p class="card-text ">Вітер: <?=$_SESSION['infoReactionWeatherInProfile']['Wind']?>м/с</p>
+          <h4>Реакція:</h4>
+          <h5><?=$_SESSION['infoReactionInProfile']?></h5>
         </div>
       </div>
     </div>
