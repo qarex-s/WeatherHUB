@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['userToken']) ||!isset($_SESSION['infoReactionWeatherInProfile'])){
+if(!isset($_SESSION['userToken']) ){
     $_SESSION['Message'] = "Треба увійти в аккаунт";
     header('Location: /View/Home/Weather.php');
 }
@@ -44,19 +44,29 @@ if(!isset($_SESSION['userToken']) ||!isset($_SESSION['infoReactionWeatherInProfi
     </div>
     <hr class="md-5">
     <div class="card-wrapper col-md-15 d-flex justify-content-center  md-5 md-5">
+
+    <?php
+    
+    if(isset($_SESSION['infoReactionWeatherInProfile'])){
+      echo '
       <div class="card col-md-5 text-center img-fluid mx-auto d-block ">
-        <img src="<?=$_SESSION['infoReactionWeatherInProfile']['ImageWeather']?>" style="width: 300px; height: 250px; object-fit: contain;" alt="Photo 1" class="card-img-top ">
-        <div class="card-body">
-        <h5 class="card-text ">Погода: <?=$_SESSION['infoReactionWeatherInProfile']['Name_weather']?></h5>
-        <h6 class="card-text ">Місто: <?=$_SESSION['infoReactionWeatherInProfile']['City']?></h6>
-        <h6 class="card-text "><?=$_SESSION['infoReactionWeatherInProfile']['Date']?></h6>
-        <h6 class="card-text ">Температура: <?=$_SESSION['infoReactionWeatherInProfile']['Temperature']?>C</h6>
-        <p class="card-text ">Хмарність: <?=$_SESSION['infoReactionWeatherInProfile']['Cloud']?>%</p>
-        <p class="card-text ">Вітер: <?=$_SESSION['infoReactionWeatherInProfile']['Wind']?>м/с</p>
+      <img src="' . $_SESSION['infoReactionWeatherInProfile']['ImageWeather'] . '" style="width: 300px; height: 250px; object-fit: contain;" alt="Photo 1" class="card-img-top ">
+      <div class="card-body">
+          <h5 class="card-text">Погода: ' . $_SESSION['infoReactionWeatherInProfile']['Name_weather'] . '</h5>
+          <h6 class="card-text">Місто: ' . $_SESSION['infoReactionWeatherInProfile']['City'] . '</h6>
+          <h6 class="card-text">' . $_SESSION['infoReactionWeatherInProfile']['Date'] . '</h6>
+          <h6 class="card-text">Температура: ' . $_SESSION['infoReactionWeatherInProfile']['Temperature'] . 'C</h6>
+          <p class="card-text">Хмарність: ' . $_SESSION['infoReactionWeatherInProfile']['Cloud'] . '%</p>
+          <p class="card-text">Вітер: ' . $_SESSION['infoReactionWeatherInProfile']['Wind'] . 'м/с</p>
           <h4>Реакція:</h4>
-          <h5><?=$_SESSION['infoReactionInProfile']?></h5>
-        </div>
+          <h5>' . $_SESSION['infoReactionInProfile'] . '</h5>
       </div>
+  </div>
+
+      ';
+    }
+    
+    ?>
     </div>
   </div>
 

@@ -14,7 +14,7 @@ require_once '../../Repository/RecomendationWord.php';
 //require_once '../../TranslateWord.php';
 $urlDay = 'http://api.openweathermap.org/data/2.5/weather';
 $urlWeek = 'http://api.openweathermap.org/data/2.5/forecast';
-$APIKEY = '***';
+$APIKEY = '4b9b493507b1afdb7562d7d9f2a3699e';
 
 $todayTimeStamp = time();
 $NextWeekTimeStamp = $todayTimeStamp + 60*60*24*7;
@@ -132,6 +132,9 @@ if($dataDay['weather'][0]['main'] ==""){
     $_SESSION['WeatherWeekToken']  = $weekDataArray;
     $recomendedText = RecomendedText(RecomendedStat($nameWeather,$Temperature));
     $recomendedImage = RecomendedImg(RecomendedStat($nameWeather,$Temperature),$scaleClothesDataFromDb['ScaleUser']);
+    
+    $scaleImage = $scaleClothesDataFromDb['ScaleUser'];
+    $scaleText = RecomendedStat($nameWeather,$Temperature);
     //$recomendedImage = RecomendedImg(RecomendedStat($nameWeather,$tempMax),3);
     $scaleForUser =$recomendedImage;
     $scaleForUser = RecomendedStat($nameWeather,$Temperature);
@@ -156,7 +159,9 @@ if($dataDay['weather'][0]['main'] ==""){
         'Recomendation'=>$recomendedText,
         'RecomendationImage'=>$recomendedImage,
         'scale' => $scaleForUser,
-        'dateTime'=>$DateTimeWeather
+        'dateTime'=>$DateTimeWeather,
+        'infoCheckScaleForImage'=>$scaleImage,
+        'infoCheckScaleForText'=>$scaleText
     
     ];
    

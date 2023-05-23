@@ -18,9 +18,15 @@ if (!$connect) {
     die('Ошибка подключения к базе данных: ' . mysqli_connect_error());
   }
 $userId = $_GET['searchUserId'];
+$authUserId = $_SESSION['userToken']['id_user'];
 $takeUserValArray = mysqli_fetch_assoc(mysqli_query($connect, "SELECT * FROM `user` WHERE `id_user` = '$userId' "));
-$isFollow = mysqli_fetch_assoc(mysqli_query($connect, "SELECT * FROM `friendship` WHERE `second_userId` = '$userId'"));
+$isFollow = mysqli_fetch_assoc(mysqli_query($connect, "SELECT * FROM `friendship` WHERE `second_userId` = '$userId' && `first_userId` ='$authUserId'"));
+if($isFollow['isFriend'] ==null){
+    $_SESSION['isFollowed'] =0;
+}    else{
     $_SESSION['isFollowed'] = $isFollow['isFriend'];
+}
+
 
 
 $takeReactionUser = mysqli_fetch_assoc(mysqli_query($connect,

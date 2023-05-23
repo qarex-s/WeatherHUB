@@ -19,18 +19,19 @@ function RecomendedStat($Weather, $Temperature)
     } else if ($Temperature >= 15 && $Temperature < 25) {
         $scale += 2;
     } else if ($Temperature >= 5 && $Temperature < 15) {
-        $scale += 5;
-    } else if ($Temperature >= -5 && $Temperature < 5) {
         $scale += 7;
-    } else if ($Temperature >= -30 && $Temperature < -5) {
+    } else if ($Temperature >= -5 && $Temperature < 5) {
         $scale += 9;
-    } else if ($Temperature >= -60 && $Temperature < -30) {
+    } else if ($Temperature >= -30 && $Temperature < -5) {
         $scale += 10;
+    } else if ($Temperature >= -60 && $Temperature < -30) {
+        $scale += 11;
     }
 
     if($scale<0){
         $scale=1;
-    }else if($scale>10){
+    }
+     if($scale>10){
         $scale = 10;
     }
     return $scale;
@@ -42,9 +43,12 @@ function RecomendedImg($someSkale,$ClothesScale)
 {
 
     global $clothesImage;
-    $resultScale = $someSkale+$ClothesScale;
+    $resultScale = ($someSkale)+($ClothesScale);
     if($resultScale<1) $resultScale = 1;
-    else if($resultScale>10)$resultScale = 10;
+    if($resultScale>10)$resultScale = 10;
+    if($someSkale==11 && $ClothesScale==0){
+        $resultScale = 11;
+    }
     return $clothesImage[$resultScale];
 }
 

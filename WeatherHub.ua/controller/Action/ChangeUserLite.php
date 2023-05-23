@@ -22,9 +22,9 @@ if (!isset($_POST['id_auth'])) {
     $idAuth = $_POST['id_auth'];
     //checking password
     $password = $_SESSION['AuthUserForEditLite']['passValue'];
-    if($_POST['oldPassword'] =='' && $_POST['newPassword'] == '' && $_POST['ConPassword']==''){
+    if ($_POST['oldPassword'] == '' && $_POST['newPassword'] == '' && $_POST['ConPassword'] == '') {
         $password = $_SESSION['AuthUserForEditLite']['passValue'];
-    }else if ($_POST['oldPassword'] != $_SESSION['AuthUserForEditLite']['passValue']) {
+    } else if ($_POST['oldPassword'] != $_SESSION['AuthUserForEditLite']['passValue']) {
         $_SESSION['Message'] = "Старий пароль не вірний.";
         header('Location: /View/action/ChangeUserPageLite.php');
     } else if ($_POST['newPassword'] == "" && $_POST['ConPassword'] == "") {
@@ -33,8 +33,7 @@ if (!isset($_POST['id_auth'])) {
     } else if ($_POST['newPassword'] != $_POST['ConPassword']) {
         $_SESSION['Message'] = "Нові паролі не співпадають";
         header('Location: /View/action/ChangeUserPageLite.php');
-    }  
-    else {
+    } else {
         $password = $_POST['newPassword'];
     }
     $id_user = $_SESSION['userToken']['id_user'];
@@ -44,30 +43,26 @@ if (!isset($_POST['id_auth'])) {
     $UserName = $_POST['UserName'];
     $Age = $_POST['Age'];
     $genderId = $_POST['genderId'];
+    $imageUser = $_SESSION['userToken']['image'];
 
     mysqli_query($connect, " UPDATE `user` SET 
     `Email`='$Email',`Name`='$Name',`UserName`='$UserName',
     `Age`='$Age',`genderId`='$genderId' WHERE `id_user` = '$id_user'");
-   $newUserData = mysqli_fetch_assoc(mysqli_query($connect, "SELECT * FROM `user` WHERE `id_user` = '$id_user'"));
+    $newUserData = mysqli_fetch_assoc(mysqli_query($connect, "SELECT * FROM `user` WHERE `id_user` = '$id_user'"));
 
     mysqli_query($connect, " UPDATE `auth` SET `id_auth`='$id_auth',
     `userId`='$id_user',`Login`='$Email',`passValue`='$password' WHERE `id_auth` = '$id_auth'");
-    unset( $_SESSION['AuthUserForEditLite']);
+    unset($_SESSION['AuthUserForEditLite']);
     $_SESSION['userToken'] = [
-        "id_user"=>$newUserData['id_user'],
-        "Email"=>$newUserData['Email'],
-        "Name"=>$newUserData['Name'],
-        "UserName"=>$newUserData['UserName'],
-        "Age"=>$newUserData['Age'],
-        "genderId"=>$newUserData['genderId'],
-        "roleId"=>$newUserData['roleId']
-       ];
+        "id_user" => $newUserData['id_user'],
+        "Email" => $newUserData['Email'],
+        "Name" => $newUserData['Name'],
+        "UserName" => $newUserData['UserName'],
+        "Age" => $newUserData['Age'],
+        "genderId" => $newUserData['genderId'],
+        "roleId" => $newUserData['roleId'],
+        "image"=>    $imageUser
+    ];
     $_SESSION['Message'] = "Ваші дані були успішно змінені.";
     header('Location: /View/Home/Profile.php');
-    }
-
-
-
-
-
-
+}

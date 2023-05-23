@@ -2,7 +2,7 @@
 session_start();
 if (!isset($_SESSION['userToken'])) {
   $_SESSION['Message'] = "Треба увійти в аккаунт";
-  header('Location: /View/auth/Login.php');
+  header('Location: /Controller/auth/LoginController.php');
 }
 if (!isset($_SESSION['FindedUser'])) {
   $_SESSION['Message'] = "Ти не вибрав користувача";

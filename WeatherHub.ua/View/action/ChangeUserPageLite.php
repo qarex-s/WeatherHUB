@@ -23,7 +23,7 @@ if(!isset($_SESSION['AuthUserForEditLite'])){
 <body>
     <div class="container">
         <div class="text-center mt-5">
-            <img src="<?=$_SESSION['userToken']['image']?>" class="rounded-circle" alt="Avatar" style="width: 150px; height: 150px;">
+            <img src="../../<?=$_SESSION['userToken']['image']?>" class="rounded-circle" alt="Avatar" style="width: 150px; height: 150px;">
         </div>
         <div class="row mt-3">
             <div class="col-md-6 offset-md-3">
@@ -47,8 +47,8 @@ if(!isset($_SESSION['AuthUserForEditLite'])){
                     <div class="form-group">
                         <label for="gender">Gender</label>
                         <select name="genderId" class="form-control" id="gender">
-                            <option <?php if($_SESSION['userToken']['genderId'] == 1)echo 'selected';?> value="1">Male</option>
-                            <option <?php if($_SESSION['userToken']['genderId'] == 2)echo 'selected';?> value="2">Female</option>
+                            <option <?php if($_SESSION['userToken']['genderId'] == 1)echo 'selected';?> value="1">Чоловік</option>
+                            <option <?php if($_SESSION['userToken']['genderId'] == 2)echo 'selected';?> value="2">Жінка</option>
                         </select>
                     </div>
                     <div class="form-group">
